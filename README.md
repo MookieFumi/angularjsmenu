@@ -3,25 +3,18 @@ angularjsmenu
 
 Pruebas con las directivas de angular. Es un menú con un breadcrumb funcionando de forma sincronizada. Dos directivas, una para el breadcrumb y otra para el menú.
 
-Frameworks/ librerías utilizados.
-
-  - AngularJS
-  - Fastclick
-  - Bootstrap
-  - jQuery
-
 Puedes verlo funcionar en [en este sitio web de Azure].
 
 El html de nuestro index.html queda muy limpio.
 ```html
 <body ng-controller="menuController">
     <div class="container">
-        <menu-breadcrumb selected="selected"></menu-breadcrumb>
-        <menu></menu>        
+        <menu-breadcrumb></menu-breadcrumb>
+        <menu-items></menu-items>
     </div>    
     <div class="container">
-        <menu-footer author="author"></menu-footer>
-    </div>
+        <tab-footer author="author"></tab-footer>
+    </div>   
 </body>
 ```
   
@@ -79,55 +72,49 @@ El tipo de marcador se puede definir mediante restrict y pueden combinarse:
 ```html
 <script>   
    angular.controller('menu', function () {
-        $scope.author = {
-            name: 'MookieFumi',
-            url: 'http://www.mookiefumi.com'
-        };
+       $scope.author = 'MookieFumi';
    });
    
-    angular.module('menu').directive('menuFooter', function () {
+    angular.module('menu').directive('tabFooter', function () {
         return {
             restrict: 'E',
-            template: '<footer class="row margin-top-30"><div class="panel-footer text-right"><p>Realizado por <a href="{{authorInfo.url}}">{{authorInfo.name}}</a> - 2014</p></div></footer>'
+            template: '<footer class="row margin-top-30"><div class="panel-footer text-right"><p>{{author}} Copyright (c) 2014</p></div></footer>'
         };
     });
 </script>
 ```
 
-En ejemplo anterior sólo podemos usar nuestra directiva dentro de un scope concreto, para evitarlo crearemos un scope aislado de la siguiente manera.
+En ejemplo anterior sólo podemos usar nuestra directiva dentro de un scope concreto para evitarlo podemos aislar el scope de la siguiente manera.
 ```html
-<menu-footer author="author"></menu-footer>
+<tab-footer author="author"></tab-footer>
 <script>   
-    angular.module('menu').directive('menuFooter', function () {
+    angular.module('menu').directive('tabFooter', function () {
         return {
             restrict: 'E',
             scope: {
-                authorInfo: '=author'
+                author: '=author'
             },
-            template: '<footer class="row margin-top-30"><div class="panel-footer text-right"><p>Realizado por <a href="{{authorInfo.url}}">{{authorInfo.name}}</a> - 2014</p></div></footer>'
+            template: '<footer class="row margin-top-30"><div class="panel-footer text-right"><p>{{author}} Copyright (c) 2014</p></div></footer>'
         };
     });
 </script>
 ```
 
-<h2>Separar el html de la plantilla</h2>
-
-Para separar el html de la plantilla utilizamos la opción templateUrl.
+<h2>Separar el Html del archivo js</h2>
+En vez de template tenemos que utilizar la opción templateUrl.
 ```html
-<menu-footer author="author"></menu-footer>
 <script>   
-    angular.module('menu').directive('menuFooter', function () {
+    angular.module('menu').directive('tabFooter', function () {
         return {
             restrict: 'E',
             scope: {
-                authorInfo: '=author'
+                author: '=author'
             },
-            templateUrl: 'templates/menufooter.html'
+            templateUrl: 'templates/footer.html'
         };
     });
 </script>
 ```
-
 
 [en este sitio web de Azure]:http://angularjsmenu.azurewebsites.net/
 
