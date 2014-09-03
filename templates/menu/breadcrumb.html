@@ -1,0 +1,19 @@
+<ol class="breadcrumb">
+    <li ng-show="hasBack()">
+        <a ng-click="navigation.toBack()" style="cursor: pointer;">
+            <img src="https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519705-213_CircledBorderTriangleLeft-24.png" />
+        </a>
+    </li>
+    <li>
+        <a href="" ng-click="navigation.toHome()">Home</a>
+    </li>
+    <li ng-show="selected.menu!=undefined">
+        <a href="" ng-click="navigation.toMenu()">{{selected.menu.name}}</a>
+    </li>
+    <li ng-show="selected.subMenu!=undefined">
+        <a href="" ng-click="navigation.toSubMenu()">{{selected.subMenu.name}}</a>
+    </li>
+    <li ng-show="selected.item!=undefined">
+        {{selected.item.name}}
+    </li>
+</ol>

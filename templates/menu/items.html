@@ -1,0 +1,26 @@
+<h1>{{author.name}}</h1>
+<h1>{{menus.lenght}}</h1>
+<ul ng-class="{ 'hide' : selected.menu != undefined }">
+    <li ng-repeat="menu in menus" ng-click="selectMenu({index: $index, name: menu.name})" class="box">
+        <img class="box-image" ng-src="{{menu.imageUrl}}" alt="" />
+        <p class="box-title">{{menu.name | uppercase}}</p>
+        <hr>
+        <p class="box-description">{{menu.description}}</p>
+    </li>
+</ul>
+<ul ng-class="{ 'hide' : selected.subMenu != undefined }">
+    <li ng-repeat="submenu in menus[selected.menu.index].submenus" ng-click="selectSubMenu({index: $index, name: submenu.name})" class="box">
+        <img class="box-image" ng-src="{{submenu.imageUrl}}" alt="" />
+        <p class="box-title">{{submenu.name | uppercase}}</p>
+        <hr>
+        <p class="box-description">{{submenu.description}}</p>
+    </li>
+</ul>
+<ul ng-class="{ 'hide' : selected.item != undefined }">
+    <li ng-repeat="item in menus[selected.menu.index].submenus[selected.subMenu.index].items" ng-click="selectItem({index: $index, name: item.name})" class="box">
+        <img class="box-image" ng-src="{{item.imageUrl}}" alt="" />
+        <p class="box-title">{{item.name}}</p>
+        <hr>
+        <p class="box-description">{{item.description}}</p>
+    </li>
+</ul>
